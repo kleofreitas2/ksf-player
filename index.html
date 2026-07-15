@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSF Produções - Soluções em Mídias</title>
+    <!-- Importação de fontes modernas e comerciais -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: radial-gradient(circle at center, #111424 0%, #070913 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Container do Player com efeito de vidro fosco premium */
+        .player-card {
+            background: rgba(15, 18, 36, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 40px 30px;
+            border-radius: 28px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 
+                        0 0 40px rgba(0, 242, 254, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* IDENTIDADE VISUAL KSF PRODUÇÕES */
+        .brand-header {
+            margin-bottom: 30px;
+        }
+
+        /* Destaque Maior na Marca */
+        .main-brand {
+            font-size: 2.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ffffff 30%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 242, 254, 0.2);
+            line-height: 1.1;
+        }
+
+        /* Letras menores e elegantes para os slogans */
+        .sub-slogan {
+            font-size: 0.75rem;
+            color: #8fa0dd;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-top: 10px;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        /* Tag Locutor ao Vivo com efeito de Transmissão */
+        .live-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 76, 76, 0.1);
+            border: 1px solid rgba(255, 76, 76, 0.3);
+            color: #ff4c4c;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 12px;
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #ff4c4c;
+            border-radius: 50%;
+            animation: pulsar 1.5s infinite;
+        }
+
+        @keyframes pulsar {
+            0% { transform: scale(0.9); opacity: 0.4; }
+            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 10px #ff4c4c; }
+            100% { transform: scale(0.9); opacity: 0.4; }
+        }
+
+        .status-display {
+            font-size: 0.85rem;
+            color: #00f2fe;
+            margin-bottom: 25px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* CONTROLES DO PLAYER (Play, Pause, Loop) */
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .control-trigger {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .control-trigger:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Botão Play em Evidência Comercial */
+        #actionPlay {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            width: 68px;
+            height: 68px;
+            font-size: 1.4rem;
+            color: #070913;
+            box-shadow: 0 6px 20px rgba(0, 242, 254, 0.3);
+        }
+
+        #actionPlay:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 242, 254, 0.5);
+        }
+
+        /* Botão de Loop Ativo (Verde Comercial) */
+        .control-trigger.loop-on {
+            background: rgba(32, 191, 107, 0.15);
+            border-color: #20bf6b;
+            color: #26de81;
+            box-shadow: 0 0 15px rgba(32, 191, 107, 0.2);
+        }
+
+        /* BARRA DE PROGRESSO SLIDER */
+        .timeline-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 0.75rem;
+            color: #636e92;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .timeline-slider {
+            flex-grow: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .timeline-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00f2fe;
+            cursor: pointer;
+            box-shadow: 0 0 8px #00f2fe;
+        }
+
+        /* CONTROLE DE VOLUME */
+        .audio-volume-panel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 0.85rem;
+            color: #636e92;
+        }
+
+        .volume-slider {
+            width: 90px;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="player-card">
+        
+        <!-- ENDEREÇO DO ÁUDIO JÁ CORRIGIDO PARA O SEU REPOSITÓRIO DO GITHUB -->
+        <audio id="coreAudio" loop>
+            <source src="audio.mp3.mp3" type="audio/mp3">
+            Seu navegador não suporta este áudio.
+        </audio>
+
+        <!-- Cabeçalho de Marca Comercial -->
+        <div class="brand-header">
+            <h1 class="main-brand">KSF Produções</h1>
+            <div class="sub-slogan">Soluções em Mídias</div>
+            <div class="live-tag">
+                <span class="live-dot"></span>Locutor ao Vivo
+            </div>
+        </div>
+
+        <div class="status-display" id="statusInfo">Pronto para transmissão</div>
+
+        <!-- Painel de Controle Integrado -->
+        <div class="player-controls">
+            <button class="control-trigger" id="actionPause" title="Pausar Transmissão">⏸</button>
+            <button class="control-trigger" id="actionPlay" title="Iniciar Transmissão">▶</button>
+            <button class="control-trigger loop-on" id="actionLoop" title="Loop Infinito">🔁</button>
+        </div>
+
+        <!-- Linha do Tempo -->
+        <div class="timeline-container">
+            <span id="timeCurrent">0:00</span>
+            <input type="range" class="timeline-slider" id="timelineRange" value="0" min="0" max="100">
+            <span id="timeTotal">0:00</span>
+        </div>
+
+        <!-- Volume -->
+        <div class="audio-volume-panel">
+            <span>🔊</span>
+            <input type="range" class="volume-slider" id="volumeRange" value="80" min="0" max="100">
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('coreAudio');
+        const actionPlay = document.getElementById('actionPlay');
+        const actionPause = document.getElementById('actionPause');
+        const actionLoop = document.getElementById('actionLoop');
+        const timelineRange = document.getElementById('timelineRange');
+        const volumeRange = document.getElementById('volumeRange');
+        const timeCurrent = document.getElementById('timeCurrent');
+        const timeTotal = document.getElementById('timeTotal');
+        const statusInfo = document.getElementById('statusInfo');
+
+        // Play
+        actionPlay.addEventListener('click', () => {
+            audio.play();
+            statusInfo.textContent = 'Transmitindo em tempo real...';
+            statusInfo.style.color = '#26de81';
+        });
+
+        // Pause
+        actionPause.addEventListener('click', () => {
+            audio.pause();
+            statusInfo.textContent = 'Transmissão pausada';
+            statusInfo.style.color = '#ff4c4c';
+        });
+
+        // Loop Alternador
+        actionLoop.addEventListener('click', () => {
+            if (audio.loop) {
+                audio.loop = false;
