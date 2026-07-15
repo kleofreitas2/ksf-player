@@ -235,9 +235,9 @@
 
     <div class="player-card">
         
-        <!-- ENDEREÇO DO ÁUDIO JÁ CORRIGIDO PARA O SEU REPOSITÓRIO DO GITHUB -->
+        <!-- TAGS EM INGLÊS REPARADAS PARA O REPOSITÓRIO -->
         <audio id="coreAudio" loop>
-            <source src="audio.mp3.mp3" type="audio/mp3">
+            <source src="áudio.mp3.mp3" type="audio/mp3">
             Seu navegador não suporta este áudio.
         </audio>
 
@@ -302,3 +302,4 @@
         actionLoop.addEventListener('click', () => {
             if (audio.loop) {
                 audio.loop = false;
+                actionLoop.classList.remove('loop-on');
